@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using APITEST.BusinessLogic;
+using APITEST.Database;
 
 namespace APITEST
 {
@@ -36,6 +37,7 @@ namespace APITEST
         {
             services.AddControllers();
             services.AddTransient<IGroupLogic, GroupLogic>();
+            services.AddTransient<IStudentTableDB, StudentTableDB>();
         }
 
         // PIPELINE

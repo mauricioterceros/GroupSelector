@@ -6,7 +6,7 @@ using APITEST.Database.Models;
 
 namespace APITEST.Database
 {
-    public class StaudentTableDB : IStudentTableDB
+    public class StudentTableDB : IStudentTableDB
     {
         public List<Student> GetAll()
         {

@@ -9,7 +9,7 @@ using APITEST.DTOModels;
 
 namespace APITEST.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/groups")]
     [ApiController]
     public class GroupSelectorController : ControllerBase
     {
