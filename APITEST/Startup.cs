@@ -16,6 +16,14 @@ namespace APITEST
 {
     public class Startup
     {
+        /**
+         * HTTP REQUEST GET ALL GROUPS => 
+         * 1. STARTUP (Configure) PIPELINE
+         * 2. SEARCH THE CONTROLLER => GROUP CONTROLLER
+         * 3. CONTROLLER => Group Logic
+         * 4. BUSINESS LOGIC => Retrieve Students from DB && Assign Groups
+         * 5. DATABASE LAYER => manage students.
+         */
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +38,7 @@ namespace APITEST
             services.AddTransient<IGroupLogic, GroupLogic>();
         }
 
+        // PIPELINE
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -38,7 +47,7 @@ namespace APITEST
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

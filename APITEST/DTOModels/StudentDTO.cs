@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace APITEST.DTOModels
 {
-    public class Student
+    public class StudentDTO
     {
         public string Name { get; set; }
     }

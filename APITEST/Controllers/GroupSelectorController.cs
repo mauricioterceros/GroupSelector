@@ -27,9 +27,8 @@ namespace APITEST.Controllers
         // U => Update
         // D => Delete
         [HttpGet]
-        public IEnumerable<Group> GetAll() // READ
+        public IEnumerable<GroupDTO> GetAll() // READ
         {
-            // GroupLogic grouplogic = new GroupLogic();
             // Instead use dependency injection            
             return _groupLogic.GetGroupsCERTClass();
         }        

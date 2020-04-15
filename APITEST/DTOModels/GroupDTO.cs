@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace APITEST.DTOModels
 {
-    public class Group
+    public class GroupDTO
     {
         // Properties
         // Group 1 / 2 / 3 / 4 / 5
         public string GroupName { get; set; }
         // "John Smith", "Paul", ......
-        public List<Student> Students { get; set; }
+        public List<StudentDTO> Students { get; set; }
         //getStudents / setStudents
+        
+        // 4 or 5
+        public int MaxNumberOfStudents { get; set; }
     }
 }

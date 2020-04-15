@@ -9,6 +9,6 @@ namespace APITEST.BusinessLogic
     // public, private, protected, *NEW => internal => assembly
     public interface IGroupLogic
     {
-        public List<Group> GetGroupsCERTClass();
+        public List<GroupDTO> GetGroupsCERTClass();
     }
 }
