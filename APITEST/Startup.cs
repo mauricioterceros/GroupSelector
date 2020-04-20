@@ -38,6 +38,20 @@ namespace APITEST
             services.AddControllers();
             services.AddTransient<IGroupLogic, GroupLogic>();
             services.AddTransient<IStudentTableDB, StudentTableDB>();
+
+            // COPY THIS TO ENABLE SWAGGER
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc
+                (
+                    "v1", 
+                    new Microsoft.OpenApi.Models.OpenApiInfo() 
+                    { 
+                        Title = "Group Selector API - DEV/QA", 
+                        Version = "v1" 
+                    }
+                );
+            });
         }
 
         // PIPELINE
@@ -58,6 +72,13 @@ namespace APITEST
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            // COPY THIS TO ENABLE SWAGGER
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Group Selector");
             });
         }
     }
