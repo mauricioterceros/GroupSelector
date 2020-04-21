@@ -6,7 +6,9 @@ using APITEST.DTOModels;
 
 namespace APITEST.BusinessLogic
 {
-    // public, private, protected, *NEW => internal => assembly
+    // public => public to ALL
+    // internal =>  assembly ("Project = webapi,classLib,other")
+    // private, protected
     public interface IGroupLogic
     {
         public List<GroupDTO> GetGroupsCERTClass();
