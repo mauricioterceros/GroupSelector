@@ -36,8 +36,12 @@ namespace APITEST
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            // Transient
             services.AddTransient<IGroupLogic, GroupLogic>();
-            services.AddTransient<IStudentTableDB, StudentTableDB>();
+            
+            // SINGLETON 
+            services.AddSingleton<IStudentTableDB, StudentTableDB>();
 
             // COPY THIS TO ENABLE SWAGGER
             services.AddSwaggerGen(c =>
