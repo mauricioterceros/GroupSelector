@@ -11,11 +11,13 @@ namespace APITEST.BusinessLogic
 {
     public class GroupLogic : IGroupLogic
     {
-        private readonly IStudentTableDB _studentTableDB;
+        private readonly IStudentTableDB _studentTableDB; // In other Layer
+        private readonly IStudentLogic _studentLogic; // In same Layer
 
-        public GroupLogic(IStudentTableDB studentTableDB) 
+        public GroupLogic(IStudentTableDB studentTableDB, IStudentLogic studentLogic) 
         {
             _studentTableDB = studentTableDB;
+            _studentLogic = studentLogic;
         }
         /// <summary>
         /// 5 grupos => 
@@ -65,6 +67,7 @@ namespace APITEST.BusinessLogic
         {
             GroupDTO groupToAssign = groupsToAssign.Find(group => group.GroupName.Contains(groupNumber.ToString()));
 
+            // if (_studentLogic.validateGroup()) ==> Students will not be in the same group or belongs againg to a group that have 5
             if (groupToAssign != null && groupToAssign.Students.Count < groupToAssign.MaxNumberOfStudents)
             {
                 groupToAssign.Students.Add(new StudentDTO() { Name = student.Name });

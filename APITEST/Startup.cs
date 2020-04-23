@@ -37,11 +37,18 @@ namespace APITEST
         {
             services.AddControllers();
             
-            // Transient
-            services.AddTransient<IGroupLogic, GroupLogic>();
             
-            // SINGLETON 
-            services.AddSingleton<IStudentTableDB, StudentTableDB>();
+            services.AddTransient<IGroupLogic, GroupLogic>();
+            services.AddTransient<IStudentTableDB, StudentTableDB>(); // Change Group
+            ////////////////
+            services.AddTransient<IStudentLogic, StudentLogic>();
+            services.AddSingleton<IStudentDatabase, StudentDatase>();
+
+            // Services Injector Container
+            // Transient => lifetime will be ONLY in the scope that is been executed
+            // Scoped => lifetime will be GLOBAL in the HTTP REQUEST
+            // Singleton => lifetime will be from Program starts until ends. ==> MemoryLeaks
+
 
             // COPY THIS TO ENABLE SWAGGER
             services.AddSwaggerGen(c =>

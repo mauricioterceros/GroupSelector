@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using APITEST.Database.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
+using APITEST.BusinessLogic;
+using APITEST.DTOModels;
 
 namespace APITEST.Controllers
 {
@@ -12,32 +14,50 @@ namespace APITEST.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+        private readonly IStudentLogic _studentLogic;
+
+        public StudentController(IStudentLogic studentLogic)
+        {
+            _studentLogic = studentLogic;
+        }
+
+
         // GET: api/Student
         [HttpGet]
         [Route("student")]
-        public IEnumerable<string> GetAll()
+        public List<StudentDTO> GetAll()
         {
-            return new string[] { "Pedro", "Ana" };
+            // TRASIENT => _studentLogic = new StudentLogic();
+            // more linessss
+            // _studentLogic.ValidateData();
+            // _studentLogic.Add();
+            // _studentLogic.Delete();
+            // _studentLogic.Add();
+            // _studentLogic.Add();
+            // more linessss
+
+            return _studentLogic.GetAll(); // will return 2 students
+            // TRASIENT => ~StudentLogic(); // Destroy / if not destroy will have MemoryLeaks
         }
-                
+
         // DOCUMENTATION ABOUT HTTP REQUEST:
         // HTTP Request => Server //// LOADING //// Server => HTTP Response
         // QueryParams (URL) => http://localhost:9000/students?course=certi&orderBy=name 
         // Headers => METHOD (PUT/POST/GET/DELTE....) //// Authorization (user/pass) ///// SessionInfo (encrypt / JWT) / Other
         // Body => Entities a.k.a data
-        
+
 
 
         // POST: api/Student
         [HttpPost]
         [Route("student")]
         // public void Post([FromQuery]string course, [FromQuery]string orderBy)
-        public void Post([FromBody]Student newStudentDTO)
+        public void Post([FromBody]StudentDTO newStudentDTO)
         {
             // Presentation LAYER
             // ==================
             Console.WriteLine("from post => " + newStudentDTO.Name + " - " + newStudentDTO.Email);
-            // _studentBusinessLogic.AddNewStudent(newStudentDTO); ===> Calc CODIGO Student
+            _studentLogic.AddNewStudent(newStudentDTO);
 
 
 
@@ -63,7 +83,7 @@ namespace APITEST.Controllers
         // PUT: api/Student/12345
         [HttpPut]
         [Route("student/{id}")]
-        public void Put([FromBody]Student studentToUpdate, int id) // id=Code:12345
+        public void Put([FromBody]StudentDTO studentToUpdate, int id) // id=Code:12345
         {
             Console.WriteLine("from post => " + studentToUpdate.Name + " - " + studentToUpdate.Email + " - " + id);
             // _studentBusinessLogic.UpdateStudentById(id, studentToUpdate); ===> UPDATES ACTIONS
@@ -72,7 +92,7 @@ namespace APITEST.Controllers
 
         [HttpPut]
         [Route("student/name/{name}")]
-        public void Put([FromBody]Student studentToUpdate, string name) // id=Code:12345
+        public void Put([FromBody]StudentDTO studentToUpdate, string name) // id=Code:12345
         {
             Console.WriteLine("from post => " + studentToUpdate.Name + " - " + studentToUpdate.Email + " - " + name);
             // _studentBusinessLogic.UpdateStudentByName(id, studentToUpdate); ===> UPDATES ACTIONS
