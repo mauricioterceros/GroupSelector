@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+// Add this to use IConfiguration
+using Microsoft.Extensions.Configuration;
 
 using APITEST.BusinessLogic;
 using APITEST.DTOModels;
+using Microsoft.Extensions.Logging;
 
 namespace APITEST.Controllers
 {
@@ -15,10 +18,12 @@ namespace APITEST.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentLogic _studentLogic;
+        private readonly IConfiguration _configuration;
 
-        public StudentController(IStudentLogic studentLogic)
+        public StudentController(IStudentLogic studentLogic, IConfiguration config)
         {
             _studentLogic = studentLogic;
+            _configuration = config;
         }
 
 
@@ -52,12 +57,18 @@ namespace APITEST.Controllers
         [HttpPost]
         [Route("student")]
         // public void Post([FromQuery]string course, [FromQuery]string orderBy)
-        public void Post([FromBody]StudentDTO newStudentDTO)
+        public StudentDTO Post([FromBody]StudentDTO newStudentDTO)
         {
             // Presentation LAYER
             // ==================
             Console.WriteLine("from post => " + newStudentDTO.Name + " - " + newStudentDTO.Email);
-            _studentLogic.AddNewStudent(newStudentDTO);
+            StudentDTO newStudent = _studentLogic.AddNewStudent(newStudentDTO);
+
+            // POC that we can add configuration over all layers
+            var dbServer = _configuration.GetSection("Database").GetSection("ServerName");
+            newStudent.Name = $"{newStudent.Name} data from {dbServer.Value}";
+
+            return newStudent;
 
 
 

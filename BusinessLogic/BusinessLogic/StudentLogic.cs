@@ -16,9 +16,9 @@ namespace APITEST.BusinessLogic
         {
             _studentDB = studentDB;
         }
-        public void AddNewStudent(StudentDTO newStudent)
+        public StudentDTO AddNewStudent(StudentDTO newStudent)
         {
-            // Mappers
+            // Mappers => function: Student.FromDTOtoEntity
             Student student = new Student();
             student.Email = newStudent.Email;
             student.Name = newStudent.Name;
@@ -27,7 +27,14 @@ namespace APITEST.BusinessLogic
             student.Code = new Random().Next(0, 99999);
 
             // Add to DB
-            _studentDB.AddNew(student);
+            Student studentInDB = _studentDB.AddNew(student);
+
+            // Mappers => function: Student.FromEntityToDTO
+            return new StudentDTO()
+            {
+                Name = studentInDB.Name,
+                Email = studentInDB.Email
+            };
         }
         public void UpdateStudent(StudentDTO studentToUpdate)
         {

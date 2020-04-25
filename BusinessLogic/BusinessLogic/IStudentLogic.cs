@@ -7,7 +7,7 @@ namespace APITEST.BusinessLogic
 {
     public interface IStudentLogic
     {
-        void AddNewStudent(StudentDTO newStudent);
+        StudentDTO AddNewStudent(StudentDTO newStudent);
         void UpdateStudent(StudentDTO studentToUpdate);
         void DeleteSutdent(int code);
         List<StudentDTO> GetAll();

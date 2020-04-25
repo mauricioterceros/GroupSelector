@@ -20,9 +20,11 @@ namespace APITEST.Database
             Students = new List<Student>();
         }
 
-        public void AddNew(Student newStudent)
+        public Student AddNew(Student newStudent)
         {
             Students.Add(newStudent);
+            // DB: AutoGen DATA => Triggers/Functions/ETC =>
+            return newStudent;
         }
         public void Update(Student studentToUpdate)
         {
