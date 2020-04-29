@@ -31,6 +31,13 @@ namespace APITEST.Controllers
         {
             // Instead use dependency injection            
             return _groupLogic.GetGroupsCERTClass();
-        }        
+        }
+
+        [HttpGet]
+        [Route("/demo/order")]
+        public IEnumerable<GroupDTO> GetOrder() 
+        {
+            return _groupLogic.GetGroupDemoOrder();
+        }
     }
 }

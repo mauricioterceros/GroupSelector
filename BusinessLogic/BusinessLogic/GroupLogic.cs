@@ -79,5 +79,10 @@ namespace APITEST.BusinessLogic
                 assignToGroup(newGroupNumber, groupsToAssign, student);
             }
         }
+
+        public List<GroupDTO> GetGroupDemoOrder() 
+        {
+            return GetEmptyGroups().OrderBy(group => new Random().Next()).ToList();
+        }
     }
 }

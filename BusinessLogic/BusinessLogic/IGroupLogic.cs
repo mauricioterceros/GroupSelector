@@ -12,5 +12,7 @@ namespace APITEST.BusinessLogic
     public interface IGroupLogic
     {
         public List<GroupDTO> GetGroupsCERTClass();
+
+        public List<GroupDTO> GetGroupDemoOrder();
     }
 }
