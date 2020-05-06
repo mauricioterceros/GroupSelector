@@ -10,9 +10,9 @@ namespace APITEST.BusinessLogic
 {
     public class StudentLogic : IStudentLogic
     {
-        private readonly IStudentDatabase _studentDB;
+        private readonly IStudentDBManager _studentDB;
 
-        public StudentLogic(IStudentDatabase studentDB) 
+        public StudentLogic(IStudentDBManager studentDB) 
         {
             _studentDB = studentDB;
         }

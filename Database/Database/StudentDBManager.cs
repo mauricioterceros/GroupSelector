@@ -7,7 +7,7 @@ using APITEST.Database.Models;
 
 namespace APITEST.Database
 {
-    public class StudentDatase : IStudentDatabase
+    public class StudentDBManager : IStudentDBManager
     {
         private List<Student> Students 
         {
@@ -15,7 +15,7 @@ namespace APITEST.Database
             set;
         }
 
-        public StudentDatase() 
+        public StudentDBManager() 
         {
             Students = new List<Student>();
         }
@@ -23,7 +23,6 @@ namespace APITEST.Database
         public Student AddNew(Student newStudent)
         {
             Students.Add(newStudent);
-            // DB: AutoGen DATA => Triggers/Functions/ETC =>
             return newStudent;
         }
         public void Update(Student studentToUpdate)

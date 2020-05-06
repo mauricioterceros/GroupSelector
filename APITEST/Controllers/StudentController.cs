@@ -18,12 +18,10 @@ namespace APITEST.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentLogic _studentLogic;
-        private readonly IConfiguration _configuration;
 
         public StudentController(IStudentLogic studentLogic, IConfiguration config)
         {
             _studentLogic = studentLogic;
-            _configuration = config;
         }
 
 
@@ -63,10 +61,6 @@ namespace APITEST.Controllers
             // ==================
             Console.WriteLine("from post => " + newStudentDTO.Name + " - " + newStudentDTO.Email);
             StudentDTO newStudent = _studentLogic.AddNewStudent(newStudentDTO);
-
-            // POC that we can add configuration over all layers
-            var dbServer = _configuration.GetSection("Database").GetSection("ServerName");
-            newStudent.Name = $"{newStudent.Name} data from {dbServer.Value}";
 
             return newStudent;
 

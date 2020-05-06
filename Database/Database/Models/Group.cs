@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace APITEST.DTOModels
+﻿namespace APITEST.Database.Models
 {
-    public class GroupDTO
+    public class Group
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using APITEST.BusinessLogic;
 using APITEST.Database;
+using Services;
 
 namespace APITEST
 {
@@ -46,12 +47,16 @@ namespace APITEST
         {
             services.AddControllers();
             
-            
-            services.AddTransient<IGroupLogic, GroupLogic>();
-            services.AddTransient<IStudentTableDB, StudentTableDB>(); // Change Group
-            ////////////////
+            // Business Logic
+            services.AddTransient<IGroupStudentLogic, GroupStudentLogic>();
             services.AddTransient<IStudentLogic, StudentLogic>();
-            services.AddSingleton<IStudentDatabase, StudentDatase>();
+            services.AddTransient<IGroupLogic, GroupLogic>();
+            // Database Layer
+            services.AddTransient<IGroupDBManager, GroupDBManager>();
+            services.AddTransient<IStudentDBManager, StudentDBManager>();
+            services.AddTransient<IGroupStudentDBManager, GroupStudentDBManager>();            
+
+            services.AddTransient<IGithub, Github>();
 
             // Services Injector Container
             // Transient => lifetime will be ONLY in the scope that is been executed

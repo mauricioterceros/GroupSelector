@@ -6,7 +6,7 @@ using APITEST.Database.Models;
 
 namespace APITEST.Database
 {
-    public interface IStudentDatabase
+    public interface IStudentDBManager
     {
         Student AddNew(Student newStudent);
         void Update(Student studentToUpdate);
