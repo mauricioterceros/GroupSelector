@@ -6,11 +6,11 @@ using APITEST.Database.Models;
 
 namespace APITEST.Database
 {
-    public interface IStudentDBManager
+    public interface IStudentDBManager : IDBManager
     {
         Student AddNew(Student newStudent);
-        void Update(Student studentToUpdate);
-        void Delete(int code);
+        Student Update(Student studentToUpdate);
+        bool Delete(int code);
         List<Student> GetAll();
     }
 }

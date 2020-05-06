@@ -1,39 +1,56 @@
-﻿using APITEST.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.IO;
 using APITEST.Database.Models;
 
 namespace APITEST.Database
 {
     public class StudentDBManager : IStudentDBManager
     {
-        private List<Student> Students 
+        private readonly IConfiguration _configuration;
+
+        private string _dbPath;
+        private DBContext _dbContext;
+        private List<Student> _studentList;
+
+        public StudentDBManager(IConfiguration configuration) 
         {
-            get;
-            set;
+            _configuration = configuration;
         }
 
-        public StudentDBManager() 
+        public void InitDBContext()
         {
-            Students = new List<Student>();
+            _dbPath = _configuration.GetSection("Database").GetSection("connectionString").Value;
+            _dbContext = JsonConvert.DeserializeObject<DBContext>(File.ReadAllText(_dbPath));
+            _studentList = _dbContext.Student;
+        }
+
+        public void SaveChanges()
+        {
+            File.WriteAllText(_dbPath, JsonConvert.SerializeObject(_dbContext));
+        }
+
+        public List<Student> GetAll()
+        {
+            return _studentList;
         }
 
         public Student AddNew(Student newStudent)
         {
-            Students.Add(newStudent);
-            return newStudent;
+            // SaveChanges()
+            throw new NotImplementedException();
         }
-        public void Update(Student studentToUpdate)
+        public Student Update(Student studentToUpdate)
         {
+            // SaveChanges()
+            throw new NotImplementedException();
         }
-        public void Delete(int code)
+        public bool Delete(int code)
         {
-        }
-        public List<Student> GetAll()
-        {
-            return Students;
+            // SaveChanges()
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace APITEST.Database.Models
 {
-    public class DBCotainer
+    public class DBContext
     {
         public List<Student> Student { get; set; }
         public List<GroupStudent> GroupStudent { get; set; }

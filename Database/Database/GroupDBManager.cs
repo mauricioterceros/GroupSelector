@@ -7,19 +7,31 @@ using System.IO;
 
 namespace APITEST.Database
 {
-    public class GroupDBManager : IGroupDBManager, IDBManager
+    public class GroupDBManager : IGroupDBManager
     {
         private readonly IConfiguration _configuration;
         private string _dbPath;
         private List<Group> _groupList;
-        private DBCotainer _dbContainer;
+        private DBContext _dbContext;
 
         public GroupDBManager(IConfiguration configuration)
         {
-            _configuration = configuration;
+            // assign config
+            _configuration = configuration;            
+            InitDBContext(); // new List<T>()          
+        }
+
+        public void InitDBContext()
+        {
+            // read path from config for DB (JSON)
             _dbPath = _configuration.GetSection("Database").GetSection("connectionString").Value;
-            _dbContainer = JsonConvert.DeserializeObject<DBCotainer>(File.ReadAllText(_dbPath));
-            _groupList = _dbContainer.Group;
+            // "Connect to JSON File" => DeserializeObject
+            _dbContext = JsonConvert.DeserializeObject<DBContext>(File.ReadAllText(_dbPath));
+            _groupList = _dbContext.Group;
+        }
+        public void SaveChanges()
+        {
+            File.WriteAllText(_dbPath, JsonConvert.SerializeObject(_dbContext));
         }
         public Group AddNew(Group newGroup)
         {
@@ -50,15 +62,14 @@ namespace APITEST.Database
             (
                 groupStundent => groupStundent.GroupId == groupToUpdate.GroupId
             );
+
             groupFound.GroupId = groupToUpdate.GroupId;
             groupFound.GroupName = groupToUpdate.GroupName;
             groupFound.MaxNumberOfStudents = groupToUpdate.MaxNumberOfStudents;
+
             SaveChanges();
+
             return groupFound;
-        }
-        public void SaveChanges() 
-        {
-            File.WriteAllText(_dbPath, JsonConvert.SerializeObject(_dbContainer));
         }
     }
 }

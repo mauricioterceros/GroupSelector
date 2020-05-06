@@ -5,7 +5,7 @@ using APITEST.Database.Models;
 
 namespace APITEST.Database
 {
-    public interface IGroupStudentDBManager
+    public interface IGroupStudentDBManager : IDBManager
     {
         GroupStudent AddNew(GroupStudent newGroupStudent);
         GroupStudent Update(GroupStudent groupStudentToUpdate);

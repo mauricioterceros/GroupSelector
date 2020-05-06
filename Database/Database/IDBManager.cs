@@ -4,8 +4,10 @@ using System.Text;
 
 namespace APITEST.Database
 {
+    // Repository
     public interface IDBManager
     {
+        void InitDBContext();
         void SaveChanges();
     }
 }
