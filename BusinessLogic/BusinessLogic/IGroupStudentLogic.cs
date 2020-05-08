@@ -13,8 +13,6 @@ namespace APITEST.BusinessLogic
     {
         public List<GroupStudentDTO> GetCurrentGroupStudentList();
         public List<GroupStudentDTO> GetNewGroupStudentList();
-        public List<GroupStudentDTO> GetGroupDemoOrder();
-
-        
+        public List<GroupStudentDTO> GetGroupDemoOrder();      
     }
 }

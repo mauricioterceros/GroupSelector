@@ -18,6 +18,7 @@ namespace APITEST.Database
         public StudentDBManager(IConfiguration configuration) 
         {
             _configuration = configuration;
+            InitDBContext();
         }
 
         public void InitDBContext()

@@ -6,5 +6,7 @@ namespace APITEST.BusinessLogic
     public interface IGroupLogic
     {
         public List<GroupDTO> GetAll();
+
+        public List<ProductDTO> GetAllProducts();
     }
 }

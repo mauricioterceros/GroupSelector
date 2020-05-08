@@ -56,12 +56,25 @@ namespace APITEST
             services.AddTransient<IStudentDBManager, StudentDBManager>();
             services.AddTransient<IGroupStudentDBManager, GroupStudentDBManager>();            
 
-            services.AddTransient<IGithub, Github>();
+            services.AddTransient<IProductBackingService, ProductBackingService>();
 
             // Services Injector Container
             // Transient => lifetime will be ONLY in the scope that is been executed
             // Scoped => lifetime will be GLOBAL in the HTTP REQUEST
             // Singleton => lifetime will be from Program starts until ends. ==> MemoryLeaks
+
+            // ADDING CORS
+            // 1. Update launch settings according with config
+            // 2. Add this block to startup (ConfigureServices)
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.WithOrigins("*")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod()
+                                      );
+            });
+            // End CORS block
 
             var swaggerTitle = Configuration
                 .GetSection(SWAGGER_SECTION_SETTING_KEY)
