@@ -38,6 +38,10 @@ namespace APITEST.BusinessLogic
         }
         public void UpdateStudent(StudentDTO studentToUpdate)
         {
+            if (studentToUpdate.Code == null) 
+            {
+                throw new Exception("Invalid data, code is misssing"); // StudentLogicInvalidDataException()
+            }
         }
         public void DeleteSutdent(int code)
         {

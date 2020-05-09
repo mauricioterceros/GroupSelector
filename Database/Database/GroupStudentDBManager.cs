@@ -8,6 +8,8 @@ using System.IO;
 using Newtonsoft.Json;
 
 using APITEST.Database.Models;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace APITEST.Database
 {
@@ -17,6 +19,7 @@ namespace APITEST.Database
         private string _dbPath;
         private List<GroupStudent> _groupStudentList;
         private DBContext _dbContainer;
+        public readonly ILogger<GroupStudentDBManager> _logger;
         public GroupStudentDBManager(IConfiguration config)
         {
             _configuration = config;
@@ -26,6 +29,7 @@ namespace APITEST.Database
         public void InitDBContext() 
         {
             _dbPath = _configuration.GetSection("Database").GetSection("connectionString").Value;
+            Log.Logger.Information("test");
             _dbContainer = JsonConvert.DeserializeObject<DBContext>(File.ReadAllText(_dbPath));
             _groupStudentList = _dbContainer.GroupStudent;
         }

@@ -93,6 +93,7 @@ namespace APITEST.Controllers
             Console.WriteLine("from post => " + studentToUpdate.Name + " - " + studentToUpdate.Email + " - " + id);
             // _studentBusinessLogic.UpdateStudentById(id, studentToUpdate); ===> UPDATES ACTIONS
             // _productsBL.UpdateProductById(id, productToUpdate); ===> UPDATES ACTIONS            
+            _studentLogic.UpdateStudent(studentToUpdate);
         }
 
         [HttpPut]
