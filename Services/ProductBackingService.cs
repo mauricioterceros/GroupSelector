@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace Services
@@ -17,12 +18,12 @@ namespace Services
         }
         public async Task<List<ProductBsDTO>> GetAllProduct()
         {
+            string msPath = _configuration.GetSection("Microservices").GetSection("Products").Value;
+
             try
             {
                 // Creating HTTP Client
                 HttpClient productMS = new HttpClient();
-
-                string msPath = _configuration.GetSection("Microservices").GetSection("Products").Value;
 
                 // Executing an ASYNC HTTP Method could be: Get, Post, Put, Delete
                 // In this case is a GET
@@ -44,15 +45,14 @@ namespace Services
                 else
                 {
                     // something wrong happens!
+                    // Add a new Exception for Backing Service
                     throw new BackingServiceException("BS throws the error: " + statusCode);
                 }
             }
             catch (Exception ex)
             {
-                throw new BackingServiceException("Connection with Products is not working: " + ex.Message);
+                throw new BackingServiceException("Connection with Products is not working! " + msPath);
             }
-
-                       
         }
     }
 }

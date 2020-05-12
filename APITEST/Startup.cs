@@ -15,6 +15,7 @@ using APITEST.Database;
 using Services;
 using Serilog;
 using Serilog.Events;
+using APITEST.Middlewares;
 
 namespace APITEST
 {
@@ -120,11 +121,16 @@ namespace APITEST
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseExceptionHanlderMiddleware();
+
+            // app.UseHsts();
             // app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors("AllowAll");
+
+            app.UseAuthorizationMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

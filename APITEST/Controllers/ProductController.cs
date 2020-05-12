@@ -22,6 +22,7 @@ namespace APITEST.Controllers
         [Route("")]
         public List<ProductBsDTO> Get()
         {
+            Console.WriteLine("This is the END POINT for Products");
             return _productBS.GetAllProduct().Result;
         }
 
